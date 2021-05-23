@@ -12,7 +12,7 @@ import com.example.listsinandroid.databinding.ListItemBinding;
 import java.util.List;
 
 /**
- *
+ * Represents adapter for courses data list
  */
 public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductViewHolder> {
     /**
@@ -21,9 +21,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductV
     private final Context mContext;
 
     /**
-     * For the list of courses data
+     * List of all courses
      */
     private final List<String> mCourses;
+
+    /**
+     * List of the visible courses
+     */
+    private List<String> visibleCourses;
 
     /**
      * To initiate the object with
@@ -33,6 +38,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductV
     public CoursesAdapter(Context context, List<String> courses) {
         this.mContext = context;
         this.mCourses = courses;
+        this.visibleCourses = courses;
     }
 
     @NonNull
@@ -47,13 +53,36 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull CoursesAdapter.ProductViewHolder holder, int position) {
-        holder.binding.textView.setText(mCourses.get(position));
+        holder.binding.textView.setText(visibleCourses.get(position));
     }
 
     @Override
     public int getItemCount() {
         // Return the length of the list
-        return mCourses.size();
+        return visibleCourses.size();
+    }
+
+    /**
+     * To filter the visible list
+     * @param query query for the search
+     */
+    public void filter(String query) {
+        // When no query given
+        if (query.trim().isEmpty()) {
+            visibleCourses = mCourses;
+            return;
+        }
+
+        // Filter according to the query
+        visibleCourses.clear();
+        for (String course :
+                mCourses) {
+            if (course.toLowerCase().contains(query.toLowerCase()))
+                visibleCourses.add(course);
+        }
+
+        // Refreshing the list
+        notifyDataSetChanged();
     }
 
     /**

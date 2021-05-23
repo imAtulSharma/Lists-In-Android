@@ -1,6 +1,8 @@
 package com.example.listsinandroid;
 
 import android.os.Bundle;
+import android.view.Menu;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +16,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 
+    CoursesAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,14 +29,39 @@ public class MainActivity extends AppCompatActivity {
         // Setting the title for the activity
         setTitle("Recycler View");
 
-        // Make adapter for the list view
-        CoursesAdapter adapter = new CoursesAdapter(this, courses);
+        // Initialize adapter for the list view
+        adapter = new CoursesAdapter(this, courses);
 
         // Setup the layout manager for the recycler view
         binding.list.setLayoutManager(new LinearLayoutManager(this));
 
         // Set the adapter to the list view
         binding.list.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu
+        getMenuInflater().inflate(R.menu.menu_custom, menu);
+
+        // Get the search view
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.filter(newText);
+                return true;
+            }
+        });
+
+        return true;
     }
 
     /**
