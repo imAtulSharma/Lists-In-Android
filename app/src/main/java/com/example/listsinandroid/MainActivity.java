@@ -14,9 +14,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    ActivityMainBinding binding;
-
-    CoursesAdapter adapter;
+    // Binding object
+    private ActivityMainBinding binding;
+    // adapter for the list
+    private CoursesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

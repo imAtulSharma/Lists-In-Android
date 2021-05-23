@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listsinandroid.databinding.ListItemBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents adapter for courses data list
  */
-public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductViewHolder> {
+public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseViewHolder> {
     /**
      * For the context
      */
@@ -38,21 +39,21 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductV
     public CoursesAdapter(Context context, List<String> courses) {
         this.mContext = context;
         this.mCourses = courses;
-        this.visibleCourses = courses;
+        this.visibleCourses = new ArrayList<>(courses);
     }
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate layout
         ListItemBinding binding = ListItemBinding.inflate(LayoutInflater.from(mContext), parent, false);
 
         // Create and return view holder
-        return new ProductViewHolder(binding);
+        return new CourseViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CoursesAdapter.ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
         holder.binding.textView.setText(visibleCourses.get(position));
     }
 
@@ -67,18 +68,20 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductV
      * @param query query for the search
      */
     public void filter(String query) {
-        // When no query given
-        if (query.trim().isEmpty()) {
-            visibleCourses = mCourses;
-            return;
-        }
-
-        // Filter according to the query
+        // Clear the list
         visibleCourses.clear();
-        for (String course :
-                mCourses) {
-            if (course.toLowerCase().contains(query.toLowerCase()))
-                visibleCourses.add(course);
+
+        // Check for query given
+        if (query.trim().isEmpty()) {
+            visibleCourses.addAll(mCourses);
+        } else {
+            // Filter according to the query
+            for (String course :
+                    mCourses) {
+                if (course.toLowerCase().contains(query.toLowerCase())) {
+                    visibleCourses.add(course);
+                }
+            }
         }
 
         // Refreshing the list
@@ -88,7 +91,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductV
     /**
      * Represents view holder for the recycler view
      */
-    static class ProductViewHolder extends RecyclerView.ViewHolder{
+    static class CourseViewHolder extends RecyclerView.ViewHolder{
         // Declare view binding object
         ListItemBinding binding;
 
@@ -96,7 +99,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ProductV
          * To give binding to the holder
          * @param listItemBinding binding of the view
          */
-        public ProductViewHolder(ListItemBinding listItemBinding) {
+        public CourseViewHolder(ListItemBinding listItemBinding) {
             super(listItemBinding.getRoot());
             this.binding = listItemBinding;
         }
