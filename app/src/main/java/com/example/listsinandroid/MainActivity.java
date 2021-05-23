@@ -1,9 +1,9 @@
 package com.example.listsinandroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.listsinandroid.databinding.ActivityMainBinding;
 
@@ -23,10 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Setting the title for the activity
-        setTitle("List View");
+        setTitle("Recycler View");
 
         // Make adapter for the list view
-        CoursesAdapter adapter = new CoursesAdapter(this, android.R.layout.simple_list_item_1, courses);
+        CoursesAdapter adapter = new CoursesAdapter(this, courses);
+
+        // Setup the layout manager for the recycler view
+        binding.list.setLayoutManager(new LinearLayoutManager(this));
 
         // Set the adapter to the list view
         binding.list.setAdapter(adapter);
