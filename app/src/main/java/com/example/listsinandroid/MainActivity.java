@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setTitle("List View");
 
         // Make adapter for the list view
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courses);
+        CoursesAdapter adapter = new CoursesAdapter(this, android.R.layout.simple_list_item_1, courses);
 
         // Set the adapter to the list view
         binding.list.setAdapter(adapter);
