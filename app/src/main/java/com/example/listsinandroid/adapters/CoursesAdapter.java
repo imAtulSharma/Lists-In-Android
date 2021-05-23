@@ -59,11 +59,11 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseVi
         // Bind the name
         holder.binding.checkbox.setText(visibleCourses.get(position).name);
 
-        // Restore previous checked state
-        holder.binding.checkbox.setChecked(visibleCourses.get(position).isChecked);
-
         // Handle checked changes
         holder.binding.checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> visibleCourses.get(position).isChecked = isChecked);
+
+        // Restore previous checked state
+        holder.binding.checkbox.setChecked(visibleCourses.get(position).isChecked);
     }
 
     @Override
