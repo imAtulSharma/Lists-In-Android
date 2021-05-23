@@ -1,13 +1,15 @@
-package com.example.listsinandroid;
+package com.example.listsinandroid.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listsinandroid.databinding.ListItemBinding;
+import com.example.listsinandroid.models.Course;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,19 +26,19 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseVi
     /**
      * List of all courses
      */
-    private final List<String> mCourses;
+    private final List<Course> mCourses;
 
     /**
      * List of the visible courses
      */
-    private List<String> visibleCourses;
+    private List<Course> visibleCourses;
 
     /**
      * To initiate the object with
      * @param context context for inflating purpose
      * @param courses list of courses data
      */
-    public CoursesAdapter(Context context, List<String> courses) {
+    public CoursesAdapter(Context context, List<Course> courses) {
         this.mContext = context;
         this.mCourses = courses;
         this.visibleCourses = new ArrayList<>(courses);
@@ -54,7 +56,14 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseVi
 
     @Override
     public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        holder.binding.textView.setText(visibleCourses.get(position));
+        // Bind the name
+        holder.binding.checkbox.setText(visibleCourses.get(position).name);
+
+        // Restore previous checked state
+        holder.binding.checkbox.setChecked(visibleCourses.get(position).isChecked);
+
+        // Handle checked changes
+        holder.binding.checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> visibleCourses.get(position).isChecked = isChecked);
     }
 
     @Override
@@ -76,9 +85,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.CourseVi
             visibleCourses.addAll(mCourses);
         } else {
             // Filter according to the query
-            for (String course :
+            for (Course course :
                     mCourses) {
-                if (course.toLowerCase().contains(query.toLowerCase())) {
+                if (course.name.toLowerCase().contains(query.toLowerCase())) {
                     visibleCourses.add(course);
                 }
             }

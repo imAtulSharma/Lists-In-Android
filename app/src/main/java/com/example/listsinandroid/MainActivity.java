@@ -7,7 +7,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.listsinandroid.adapters.CoursesAdapter;
 import com.example.listsinandroid.databinding.ActivityMainBinding;
+import com.example.listsinandroid.models.Course;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,14 +32,7 @@ public class MainActivity extends AppCompatActivity {
         // Setting the title for the activity
         setTitle("Recycler View");
 
-        // Initialize adapter for the list view
-        adapter = new CoursesAdapter(this, courses);
-
-        // Setup the layout manager for the recycler view
-        binding.list.setLayoutManager(new LinearLayoutManager(this));
-
-        // Set the adapter to the list view
-        binding.list.setAdapter(adapter);
+        setupRecyclerView();
     }
 
     @Override
@@ -65,11 +60,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    private void setupRecyclerView() {
+        // Initialize adapter for the list view
+        adapter = new CoursesAdapter(this, Course.listFromCoursesStrings(COURSES));
+
+        // Setup the layout manager for the recycler view
+        binding.list.setLayoutManager(new LinearLayoutManager(this));
+
+        // Set the adapter to the list view
+        binding.list.setAdapter(adapter);
+    }
+
     /**
      * <p>List of different courses</p>
      * It is scraped from <a href="https://www.collegedekho.com/courses/">www.collegedekho.com</a>
      */
-    private static final List<String> courses = new ArrayList<>(Arrays.asList(
+    private static final List<String> COURSES = new ArrayList<>(Arrays.asList(
             "B.Tech - Biochemical Engineering",
             "B.Tech - Textile Engineering",
             "B.Tech - Ceramic Engineering",
