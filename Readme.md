@@ -10,7 +10,5 @@ Download [APK](https://github.com/imAtulSharma/Lists-In-Android/releases/downloa
 
 ## Previews of the application
 
-<img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/01.png" alt="" width="231">
-<img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/02.png" alt="" width="231">
-<img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/03.png" alt="" width="231">
-<img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/04.png" alt="" width="231">
+<img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/01.png" alt="" width="231"><img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/02.png" alt="" width="231">
+<img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/03.png" alt="" width="231"><img title="" src="https://raw.githubusercontent.com/imAtulSharma/imAtulSharma/master/CDN/AndroidApplicationsPreviews/Lists%20In%20Android/04.png" alt="" width="231">
